@@ -1,0 +1,49 @@
+<%= form_for(@profil) do |f| %>
+  <% if @profil.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@profil.errors.count, "error") %> prohibited this profil from being saved:</h2>
+
+      <ul>
+      <% @profil.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :prenom %>
+    <%= f.text_field :prenom, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :sexe %>
+    <%= f.text_field :sexe, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :age %>
+    <%= f.text_field :age, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :phone %>
+    <%= f.text_field :phone, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :address %>
+    <%= f.text_field :address, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :website %>
+    <%= f.text_field :website, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :codePostal %>
+    <%= f.text_field :codePostal, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :ville %>
+    <%= f.text_field :ville, class: "form-control" %>
+  </div>
+  <div class="actions">
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+<% end %>
