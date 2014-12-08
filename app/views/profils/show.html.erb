@@ -38,6 +38,7 @@
   <strong>Ville:</strong>
   <%= @profil.ville %>
 </p>
+<%= link_to "Evaluer", new_profil_review_path(@profil), class: "btn btn-primary" %>
 
 <%= link_to 'Edit', edit_profil_path(@profil), class: "btn btn-link" %> |
 <%= link_to 'Back', profils_path, class: "btn btn-link" %>
