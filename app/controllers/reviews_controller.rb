@@ -1,6 +1,8 @@
 class ReviewsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_review, only: [:edit, :update, :destroy]
+  before_action :set_restaurant
+  before_action :check_user, only: [:edit, :update, :destroy]
  
   # GET /reviews/new
   def new
@@ -14,6 +16,8 @@ class ReviewsController < ApplicationController
 
     def create
     @review = Review.new(review_params)
+    @review.user_id = current_user.id
+    @review.profil_id = @profil.id
 
     respond_to do |format|
       if @review.save
@@ -34,6 +38,10 @@ class ReviewsController < ApplicationController
   def destroy
     @review.destroy
     respond_with(@review)
+  end
+
+  def set_restaurant
+    @profil = Profil.find(params[:profil_id])
   end
 
   private

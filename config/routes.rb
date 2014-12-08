@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  resources :reviews, except: [:show, :index]
 
   devise_for :users
-  resources :profils
+  resources :profils  do
+    resources :reviews, except: [:show, :index]
+  end
   root 'profils#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
