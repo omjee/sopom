@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141208124738) do
+ActiveRecord::Schema.define(version: 20141208133716) do
 
   create_table "profils", force: true do |t|
     t.string   "prenom"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20141208124738) do
     t.string   "ville"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "image"
   end
 
 end
