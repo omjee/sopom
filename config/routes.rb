@@ -1,10 +1,27 @@
 Rails.application.routes.draw do
 
+  resources :jobs
+
+  resources :metiers
+
   devise_for :users
   resources :profils  do
     resources :reviews, except: [:show, :index]
   end
   root 'profils#index'
+  get '/profils/:ville' => 'profils#showVille', as: 'villes'
+  get 'search' => "profils#search"
+  get  "/search/:ville"  => "profils#search"
+
+  post "/search/:ville"  => "profils#search_post"
+  post "/search/:codePostal"  => "profils#search_postCP"
+
+
+#[:villes].each do |profils|
+ # match "#{profils}/:id", :controller => :villes => :show, :type => profils, :as => profils
+
+
+#end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

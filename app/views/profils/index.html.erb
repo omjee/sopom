@@ -2,6 +2,36 @@
   <h2>Yelpdemo is the best way to find reviews on local restaurants.</h2>
   <h3>Explore the favorite diners, pastry shops, and eateries in your community.
   <br>Leave reviews and ratings for your fellow foodies.</h3>
+  <div class ="filter">
+      <%= form_tag search_path, class:"form-inline", method: :get do %>
+        <div class="form-group">
+          <%= label_tag :ville %>
+          <%= 
+          select_tag(:ville, options_from_collection_for_select(Profil.select(:ville).distinct, :ville, :ville, params[:ville]), {class: "form-control"})%>
+        </div>
+        <div class="form-group">
+          <%= label_tag :sexe %>
+          <%= text_field_tag :sexe, params["sexe"], class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= label_tag :codePostal %>
+          <%= text_field_tag :codePostal, params["codePostal"], class: "form-control"  %>
+        </div>
+          <%= submit_tag "Trouver", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+</div>
+<div class="center">
+  <div class="row">
+    <% @profils.each do |profil| %>
+      <div class="col-md-3">
+        <div class="thumbnail">
+          <%= link_to image_tag(profil.image.url),profil %>
+          <div class="caption"><h3><%= profil.prenom %></h3></div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
 
 
@@ -42,3 +72,4 @@
 <br>
 
 <%= link_to 'New Profil', new_profil_path, class: "btn btn-link" %>
+

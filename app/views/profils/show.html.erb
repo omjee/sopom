@@ -1,7 +1,26 @@
+    <%
+meta title: "My Title",
+     description: "My description",
+     keywords: %w(keyword1 keyword2 keyword3)
+%>
+
+    <iframe
+      width="1000"
+      height="250"
+      frameborder="0" style="border:0"
+      src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBJg0HiO2KtvExTuiWB6rKhmUUsHXFk6dY
+        &q=<%= @profil.address.parameterize %>+<%= @profil.codePostal.parameterize %>&zoom=14"
+      src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBJg0HiO2KtvExTuiWB6rKhmUUsHXFk6dY
+        &q=40-rue-duquesne+69006&zoom=14">
+    </iframe>
+    <br><br>
 <div class="row">
   <div class="col-md-3">
     <%= image_tag @profil.image_url %>
     <h2><%= @profil.prenom %></h2>
+    <div class="star-rating" data-score= <%= @avg_rating %> ></div>
+    <p><%= "#{@reviews.length} reviews" %></p>
+
 
 
     <p>
@@ -12,6 +31,11 @@
     <p>
       <strong>Age:</strong>
       <%= @profil.age %>
+    </p>
+
+    <p>
+      <strong>job id:</strong>
+      <%= @profil.job_id %>
     </p>
 
     <p>
@@ -44,10 +68,23 @@
     <% if @reviews.blank? %>
       <h3>No reviews yet. Be the first to write one!</h3>
     <% else %>
+
       <table class="table">
+      <thead>
+        <tr>
+          <th class="col-md-3"></th>
+          <th class="col-md-9"></th>
+        </tr>
+      </thead>
         <tbody>
           <% @reviews.each do |review| %>
             <tr>
+              <td>
+                <h4>
+                  <%= "#{review.user.first_name.capitalize} #{review.user.last_name.capitalize[0]}." %>
+                </h4>
+                <p><%= review.created_at.strftime("%-d/%-m/%-y") %></p>
+              </td>
               <td>
                 <div class="star-rating" data-score= <%= review.rating %> ></div>
                 <p><%= h(review.comment).gsub(/\n/, '<br/>').html_safe %></p>

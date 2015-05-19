@@ -1,0 +1,15 @@
+autocomplete.erb
+
+          <input  id="autocomplete" placeholder="Enter your address" onFocus="geolocate()" type="text"></input>
+          <input  id="locality" name="locality" hidden="true"  disabled="true"></input>    
+          <input  id="street_number" hidden="true" disabled="true"></input>
+          <input  id="route" hidden="true" disabled="true"></input>
+          <input  id="administrative_area_level_1" hidden="true" disabled="true"></input>
+          <input  id="postal_code" name="postal_code" type="text"  disabled="true"></input>
+          <input  id="country" hidden="true" disabled="true"></input>
+<%= form_tag("/search", method: :post) do %>
+  <%= search_field_tag(:ville) %>
+
+  <%= search_field_tag(:codePostal) %>
+  <%= submit_tag ("Search") %>
+<% end %>

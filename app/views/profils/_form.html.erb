@@ -16,6 +16,10 @@
     <%= f.text_field :prenom, class: "form-control" %>
   </div>
   <div class="form-group">
+    <%= f.collection_select :job_id, Job.all, :id, :name, {prompt: "choisis ton métier"}, {class: "btn btn-default dropdown-toggle"} %>
+  </div>
+
+  <div class="form-group">
     <%= f.label :sexe %>
     <%= f.text_field :sexe, class: "form-control" %>
   </div>

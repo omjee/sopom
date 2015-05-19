@@ -4,7 +4,40 @@ class ProfilsController < ApplicationController
   # GET /profils
   # GET /profils.json
   def index
+    if params[:job].blank?
+      @profils = Profil.all
+    else
+      @job_id=Job.find_by(name: params[:job]).id
+      @profils = Profil.where(job_id: @job_id)
+    end
+
+  end
+
+  def search
     @profils = Profil.all
+    @profils = @profils.where(ville: params["locality"]) if params["locality"].present?
+    @profils = @profils.where(ville: params["ville"]) if params["ville"].present?
+
+    @profils = @profils.where(sexe: params["sexe"]) if params["sexe"].present?
+    @profils = @profils.where(codePostal: params["postal_code"]) if params["postal_code"].present?
+    @profils = @profils.where(codePostal: params["codePostal"]) if params["codePostal"].present?
+
+
+    @reviews = Review.all
+
+    if @reviews.blank?
+      @avg_rating = 0
+    else
+      @avg_rating = @reviews.average(:rating).round(2)
+    end
+  end
+
+  def search_post
+    redirect_to "/search/#{params[:ville]}"
+  end
+
+  def search_postCP
+    redirect_to "/search/#{params[:codePostal]}"
   end
 
   # GET /profils/1
@@ -16,6 +49,10 @@ class ProfilsController < ApplicationController
     else
       @avg_rating = @reviews.average(:rating).round(2)
     end
+  end
+
+ def find_profil
+    @profils = Profil.type(params[:type].to_s.singularize).where(:reference => params[:id]).first if params[:id]
   end
 
   # GET /profils/new
@@ -75,6 +112,6 @@ class ProfilsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profil_params
-      params.require(:profil).permit(:prenom, :sexe, :age, :phone, :address, :website, :codePostal, :ville, :image)
+      params.require(:profil).permit(:prenom, :sexe, :job_id, :age, :phone, :address, :website, :codePostal, :ville, :image)
     end
 end

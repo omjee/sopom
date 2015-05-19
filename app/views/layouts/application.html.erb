@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Sopom</title>
+  
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <%= render 'layouts/bootstrap' %>
+  <%= metamagic %>
+
 </head>
 
 
@@ -24,6 +27,8 @@
       <% end %>
     <% end %>
 	<%= yield %>
+  <%= render 'layouts/footer' %>
+
 </div>
 </body>
 </html>
